@@ -44,6 +44,10 @@
             <td th:text="${product.brand}"></td>
             <td th:text="${product.madeIn}"></td>
             <td th:text="${product.price}"></td>
+            <td>
+                <a class="btn btn-primary" th:href="@{'/edit/' + ${product.id}}"> Edit</a>
+                <a class="btn btn-danger" th:href="@{'/delete/' + ${product.id}}"> Delete</a>
+            </td>
         </tr>
         </tbody>
     </table>
