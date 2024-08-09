@@ -2,6 +2,7 @@ package com.juannnnn.product_management.controller;
 
 import com.juannnnn.product_management.model.Product;
 import com.juannnnn.product_management.service.ProductService;
+import org.springframework.data.repository.query.Param;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -9,18 +10,20 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @org.springframework.stereotype.Controller
-public class Controller {
+public class ProductController {
 
     private ProductService productService;
 
-    public Controller(ProductService productService) {
+    public ProductController(ProductService productService) {
         this.productService = productService;
     }
     @GetMapping("/")
-    public String homePage(Model model){
+    public String homePage(Model model, @Param("keyWord") String keyWord){
 
-        List<Product> productList = productService.lisAll();
+        List<Product> productList = productService.listAll(keyWord);
+
         model.addAttribute("productList", productList);
+        model.addAttribute("keyWord", keyWord);
 
         return "index";
     }
